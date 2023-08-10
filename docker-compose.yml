@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  kafka:
+    build:
+      context: src
+      args:
+        JAVA_HOME: "${JAVA_HOME:-/jre}"
+        JAVA_BASE_IMAGE_VERSION: "${JAVA_BASE_IMAGE_VERSION:-17}"
+        JAVA_MODULES: ${JAVA_MODULES:-java.base,java.desktop,java.xml,java.management,java.naming,java.net.http,java.security.jgss,java.security.sasl,jdk.httpserver,jdk.unsupported,jdk.management.agent,jdk.crypto.ec}
+        KAFKA_HOME: "${KAFKA_HOME:-/kafka}"
+        KAFKA_VERSION: "${KAFKA_VERSION:?You should set KAFKA_VERSION env variable}"
+        KAFKA_SCALA_VERSION: "${KAFKA_SCALA_VERSION:-2.13}"
+        KAFKA_USER: "${KAFKA_USER:-kafka}"
+        KAFKA_USER_UID: "${KAFKA_USER_UID:-1000}"
+        ALPINE_BASE_IMAGE_VERSION: "${ALPINE_BASE_IMAGE_VERSION:-3}"
