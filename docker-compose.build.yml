@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  kafka:
+    image: ${GL_DOCKER_HUB_REGISTRY}/${GL_DOCKER_HUB_PROJECT_NAMESPACE}/${GL_DOCKER_HUB_PROJECT_NAME}:${BUILD_TAG}
+    build:
+      cache_from:
+        - "${GL_DOCKER_HUB_REGISTRY}/${GL_DOCKER_HUB_PROJECT_NAMESPACE}/${GL_DOCKER_HUB_PROJECT_NAME}:${BUILD_TAG}"
+      args:
+        BUILDKIT_INLINE_CACHE: 1

@@ -1,0 +1,22 @@
+image: docker:stable
+
+services:
+  - name: docker:dind
+    alias: docker
+
+stages:
+  - build
+
+before_script:
+  - apk add make
+
+build-image:
+  stage: build
+  script:
+    - echo "$GL_DOCKER_HUB_ACCESS_TOKEN" | docker login -u "$GL_DOCKER_HUB_USERNAME" "$GL_DOCKER_HUB_REGISTRY" --password-stdin
+    - make target=build build
+    - make target=build push
+  parallel:
+    matrix:
+      - KAFKA_VERSION: ['3.4.0', '3.4.1']
+        KAFKA_SCALA_VERSION: ['2.12', '2.13']
