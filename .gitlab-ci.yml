@@ -8,7 +8,7 @@ stages:
   - build
 
 before_script:
-  - apk add make docker-compose-plugin
+  - apk add make docker-cli-compose
 
 build-image:
   stage: build
